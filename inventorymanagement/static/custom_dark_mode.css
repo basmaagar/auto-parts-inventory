@@ -1,0 +1,28 @@
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode a {
+    color: #bb86fc;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .card,
+body.dark-mode .my-card {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .card-header {
+    background-color: #2c2c2c !important;
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .nav-link {
+    color: #e0e0e0 !important;
+}
+
+body.dark-mode .nav-link:hover {
+    color: #bb86fc !important;
+}

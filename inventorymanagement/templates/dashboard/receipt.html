@@ -1,0 +1,101 @@
+{% extends 'partials/base.html' %}
+{% block title %}Order Receipt{% endblock %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+
+<style>
+    .receipt-container {
+        max-width: 700px;
+        margin: 20px auto;
+        padding: 30px;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #fff;
+    }
+    .receipt-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+    .receipt-header h2 {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+    .receipt-header .order-info {
+        text-align: right;
+        color: #e74c3c;
+        font-weight: bold;
+    }
+    .receipt-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    .receipt-table th, .receipt-table td {
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+        text-align: left;
+    }
+    .receipt-table th {
+        background-color: #f8f8f8;
+        color: #333;
+    }
+    .receipt-summary {
+        width: 300px;
+        float: right;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+    .receipt-summary td {
+        padding: 5px 10px;
+    }
+    .print-button {
+        margin-bottom: 20px;
+    }
+</style>
+
+<div class="receipt-container">
+    <div class="receipt-header">
+        <h2>Basma's inventory</h2>
+        <div class="order-info">
+            <div>Invoice</div>
+            <div>ORDER #{{ order.id|stringformat:"08d" }}</div>
+            <div>{{ order.order_date|date:"M. d, Y, h:i a" }}</div>
+        </div>
+    </div>
+
+    <p>Hello, {{ order.user.username }}</p>
+    <p>Thank you for shopping from our store and for your order.</p>
+
+    <table class="receipt-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>{{ order.part.name }}</strong></td>
+                <td> {{ order.part.price|floatformat:0 }}Dhs</td>
+                <td> {{ order.subtotal|default:"N/A" }}Dhs</td>
+            </tr>
+        </tbody>
+            <div class="receipt-summary">
+        <table style="text-align: left;">
+            <tr>
+                <td>Total:</td>
+                <td>Dhs {{ order.subtotal|default:"N/A" }}</td>
+            </tr>
+        </table>
+    </div>
+    </table>
+
+
+</div>
+
+{% endblock %}

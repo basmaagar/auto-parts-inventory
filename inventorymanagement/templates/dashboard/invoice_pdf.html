@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice {{ invoice.invoice_number }}</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 20px;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .invoice-details {
+            margin-bottom: 30px;
+        }
+        .invoice-details p {
+            margin: 0;
+        }
+        table {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <h2>Invoice {{ invoice.invoice_number }}</h2>
+    <div class="invoice-details">
+        <p><strong>Invoice Date:</strong> {{ invoice.invoice_date }}</p>
+        <p><strong>Order ID:</strong> {{ invoice.order.id }}</p>
+        <p><strong>Customer:</strong> {{ invoice.order.user.username }}</p>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Part</th>
+                <th>Quantity</th>
+                <th>Price per Unit</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ invoice.order.part.name }}</td>
+                <td>{{ invoice.order.order_quantity }}</td>
+                <td>${{ invoice.order.part.price }}</td>
+                <td>${{ invoice.total_amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

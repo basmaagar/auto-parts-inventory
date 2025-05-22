@@ -1,0 +1,59 @@
+{% extends 'partials/base.html' %}
+{% block title %}Order Page{% endblock %}
+
+{% block content %}
+{% include 'partials/topnav.html' %}
+
+<div class="row my-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+        <table class="table bg-white">
+            <thead class="bg-navy text-white" style="background-color: navy !important; color: white !important;">
+                <tr>
+                    <th scope="col">Product</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Ordered by</th>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>{{ order.part.name }}</td>
+                    <td>{{ order.part.category.name }}</td>
+                    <td>{{ order.order_quantity }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>{{ order.order_date }}</td>
+                    <td>
+                        {% if order.is_confirmed %}
+                            <span class="badge badge-success">Confirmed</span>
+                        {% else %}
+                            <span class="badge badge-warning">Pending</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if user.is_superuser and not order.is_confirmed %}
+                            <form method="post" action="{% url 'confirm_order' order.id %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-navy btn-sm">Confirm</button>
+                            </form>
+                        {% elif order.is_confirmed %}
+                            <a href="{% url 'receipt_order' order.id %}" class="btn btn-success btn-sm">View Receipt</a>
+                            {% if order.invoice %}
+                            <a href="{% url 'invoice_detail' order.invoice.id %}" class="btn btn-primary btn-sm">See Invoice</a>
+                            {% endif %}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

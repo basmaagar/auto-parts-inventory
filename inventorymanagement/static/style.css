@@ -1,0 +1,59 @@
+/* Header/Footer */
+body header, body footer {
+    background-color: #2F4F4F !important; /* Slate Gray */
+    color: white !important;
+}
+
+/* Primary Buttons */
+body .btn-primary {
+    background-color: #DC143C !important; /* Crimson Red */
+    border-color: #DC143C !important;
+    color: white !important;
+}
+
+body .btn-primary:hover {
+    background-color: #B22222 !important; /* Burnt Orange (darker shade) */
+    border-color: #B22222 !important;
+    color: white !important;
+}
+
+/* Hover Effects for other buttons */
+body .btn:hover {
+    filter: brightness(85%) !important;
+}
+
+/* Tables / Cards */
+body .table, body .card {
+    background-color: white !important;
+    border: 1px solid #D3D3D3 !important; /* Light Gray */
+}
+
+/* Alerts / Notifications */
+body .alert-warning {
+    background-color: #FFEB3B !important; /* Yellow */
+    color: black !important;
+}
+
+body .alert-success {
+    background-color: #4CAF50 !important; /* Green */
+    color: white !important;
+}
+
+body .alert-danger {
+    background-color: #F44336 !important; /* Red */
+    color: white !important;
+}
+
+/* Inventory Status Tags */
+body .badge-success {
+    background-color: #4CAF50 !important; /* Green (in stock) */
+}
+
+body .badge-danger {
+    background-color: #F44336 !important; /* Red (out of stock) */
+}
+
+body .badge-warning {
+    background-color: #FFEB3B !important; /* Yellow (low stock) */
+    color: black !important;
+}

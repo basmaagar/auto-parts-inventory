@@ -1,0 +1,59 @@
+/* Header/Footer */
+header, footer {
+    background-color: #2F4F4F; /* Slate Gray */
+    color: white;
+}
+
+/* Primary Buttons */
+.btn-primary {
+    background-color: #DC143C; /* Crimson Red */
+    border-color: #DC143C;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #B22222; /* Burnt Orange (darker shade) */
+    border-color: #B22222;
+    color: white;
+}
+
+/* Hover Effects for other buttons */
+.btn:hover {
+    filter: brightness(85%);
+}
+
+/* Tables / Cards */
+.table, .card {
+    background-color: white;
+    border: 1px solid #D3D3D3; /* Light Gray */
+}
+
+/* Alerts / Notifications */
+.alert-warning {
+    background-color: #FFEB3B; /* Yellow */
+    color: black;
+}
+
+.alert-success {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.alert-danger {
+    background-color: #F44336; /* Red */
+    color: white;
+}
+
+/* Inventory Status Tags */
+.badge-success {
+    background-color: #4CAF50; /* Green (in stock) */
+}
+
+.badge-danger {
+    background-color: #F44336; /* Red (out of stock) */
+}
+
+.badge-warning {
+    background-color: #FFEB3B; /* Yellow (low stock) */
+    color: black;
+}

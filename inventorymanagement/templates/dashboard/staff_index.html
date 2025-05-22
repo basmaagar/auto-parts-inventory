@@ -1,0 +1,44 @@
+{% load crispy_forms_tags %}
+<div class="container">
+    <div>
+        
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        Orders Records
+                    </div>
+                    <div class="card-body">
+                        <table class="table bg-white">
+                            <thead class="bg-navy text-white" style="background-color: navy !important; color: white !important;">
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Activity</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for order in orders %}
+                                <tr>
+                                    <td>{{ order.part.name }}</td>
+                                    <td>{{ order.part.category.name }}</td>
+                                    <td>{{ order.order_quantity }}</td>
+                                    <td>
+                                        {% if order.is_confirmed %}
+                                            <span class="badge badge-success">Confirmed</span>
+                                            <a href="{% url 'receipt_order' order.id %}" class="btn btn-success btn-sm ms-2">View Receipt</a>
+                                        {% else %}
+                                            <span class="badge badge-warning">Pending</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
