@@ -24,13 +24,13 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body>
+<body{% if user.is_superuser %} class="superuser"{% endif %}>
     {% include 'partials/nav.html' %}
-    {% if user.is_authenticated %}
+    {% if user.is_authenticated and not user.is_superuser %}
         {% include 'partials/sidebar.html' %}
     {% endif %}
 
-    <div class="container content-with-sidebar">
+    <div class="container-fluid content-with-sidebar">
 
         {% block content %}
 

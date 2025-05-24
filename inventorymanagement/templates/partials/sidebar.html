@@ -1,21 +1,30 @@
 <div id="sidebar" class="sidebar">
-    <a href="{% url 'index' %}" class="active">Dashboard</a>
-    <a href="{% url 'product' %}">Products</a>
-    <a href="#">Categories</a>
-    <a href="#">Brands</a>
-    <a href="#">Orders</a>
-    <a href="#">Reports</a>
+    {% if user.is_superuser %}
+        <a href="{% url 'index' %}" class="active">Dashboard</a>
+        <a href="{% url 'index' %}">Cart</a>
+        <a href="{% url 'product' %}">Catalogue</a>
+        <a href="{% url 'receipt' %}">Receipts</a>
+        <a href="{% url 'about_us' %}">About Us</a>
+    {% else %}
+        <a href="{% url 'index' %}" class="active">Cart</a>
+        <a href="{% url 'product' %}">Catalogue</a>
+    {% endif %}
 </div>
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const sidebar = document.getElementById('sidebar');
     const toggleButton = document.getElementById('sidebarToggle');
+    const mainLayout = document.querySelector('.main-layout');
+    const content = document.querySelector('.content-with-sidebar');
     if (!toggleButton) return;  // Prevent error if toggleButton is missing
 
     toggleButton.addEventListener('click', function () {
         sidebar.classList.toggle('collapsed');
-        document.querySelector('.content-with-sidebar').classList.toggle('collapsed');
+        content.classList.toggle('collapsed');
+        if (mainLayout) {
+            mainLayout.classList.toggle('sidebar-collapsed');
+        }
     });
 });
 </script>

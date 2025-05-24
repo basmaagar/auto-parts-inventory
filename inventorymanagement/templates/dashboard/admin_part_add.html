@@ -5,13 +5,15 @@
 {% block content %}
 {% include 'partials/topnav.html' %}
 
-<div class="container my-4">
+<div class="container-fluid my-4">
     <h2>Add New Part</h2>
-    <form method="POST" novalidate>
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary mt-3">Add Part</button>
-    </form>
+    <div>
+        <form method="POST" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-primary mt-3">Add Part</button>
+        </form>
+    </div>
 </div>
 
 {% endblock %}

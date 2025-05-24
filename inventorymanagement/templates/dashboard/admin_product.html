@@ -5,34 +5,37 @@
 {% block content %}
 {% include 'partials/topnav.html' %}
 
-<div class="container my-4">
-    <h2>Product Management</h2>
-    <a href="{% url 'admin_part_add' %}" class="btn btn-success mb-3">Add New Part</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Reference</th>
-                <th>Price</th>
-                <th>Quantity in Stock</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{ product.name }}</td>
-                <td>{{ product.reference }}</td>
-                <td>${{ product.price }}</td>
-                <td>{{ product.quantityinstock }}</td>
-                <td>
-                    <a href="{% url 'product_edit' product.id %}" class="btn btn-sm btn-warning">Edit</a>
-                    <a href="{% url 'product_delete' product.id %}" class="btn btn-sm btn-danger">Delete</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+<div class="row my-4">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+        <h2>Product Management</h2>
+        <a href="{% url 'admin_part_add' %}" class="btn btn-success mb-3">Add New Part</a>
+        <table class="table bg-white">
+            <thead class="bg-navy text-white" style="background-color: navy !important; color: white !important;">
+                <tr>
+                    <th>Name</th>
+                    <th>Reference</th>
+                    <th>Price</th>
+                    <th>Quantity in Stock</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.reference }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>{{ product.quantityinstock }}</td>
+                    <td>
+                        <a href="{% url 'product_edit' product.id %}" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="{% url 'product_delete' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% endblock %}
