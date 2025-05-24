@@ -1,0 +1,94 @@
+/* UI Enhancements for sophistication */
+
+/* Navbar enhancements */
+.navbar {
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.navbar .nav-link {
+    transition: color 0.3s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
+    color: #ff4757;
+    text-decoration: underline;
+}
+
+.navbar .dropdown-menu {
+    border-radius: 0.5rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    transition: opacity 0.3s ease;
+}
+
+.navbar .dropdown-menu.show {
+    opacity: 1;
+}
+
+.navbar .dropdown-menu:not(.show) {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Button enhancements */
+.btn-primary {
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(220, 20, 60, 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #b22222;
+    box-shadow: 0 6px 12px rgba(178, 34, 34, 0.5);
+}
+
+/* Card enhancements */
+.card {
+    border-radius: 1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+}
+
+/* Smooth transitions for theme toggle */
+body {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+/* Dark mode improvements */
+body.dark-mode {
+    background-color: #121212;
+    color: #e0e0e0;
+}
+
+body.dark-mode a {
+    color: #bb86fc;
+    transition: color 0.3s ease;
+}
+
+body.dark-mode a:hover,
+body.dark-mode a:focus {
+    color: #d1aaff;
+}
+
+/* Accessibility improvements */
+.nav-link:focus,
+.btn:focus {
+    outline: 3px solid #ff4757;
+    outline-offset: 2px;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .navbar-nav {
+        text-align: center;
+    }
+    .navbar-nav .nav-item {
+        margin-bottom: 0.5rem;
+    }
+}

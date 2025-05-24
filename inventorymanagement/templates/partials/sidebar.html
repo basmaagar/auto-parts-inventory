@@ -1,0 +1,21 @@
+<div id="sidebar" class="sidebar">
+    <a href="{% url 'index' %}" class="active">Dashboard</a>
+    <a href="{% url 'product' %}">Products</a>
+    <a href="#">Categories</a>
+    <a href="#">Brands</a>
+    <a href="#">Orders</a>
+    <a href="#">Reports</a>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const sidebar = document.getElementById('sidebar');
+    const toggleButton = document.getElementById('sidebarToggle');
+    if (!toggleButton) return;  // Prevent error if toggleButton is missing
+
+    toggleButton.addEventListener('click', function () {
+        sidebar.classList.toggle('collapsed');
+        document.querySelector('.content-with-sidebar').classList.toggle('collapsed');
+    });
+});
+</script>
