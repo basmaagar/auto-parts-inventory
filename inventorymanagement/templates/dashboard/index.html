@@ -7,18 +7,35 @@
 {% if user.is_authenticated and user.is_staff and user.is_superuser %}
 {% include 'partials/topnav.html' %}
 
+<style>
+    .bg-white {
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    .card-body {
+        padding: 10px;
+    }
+    canvas {
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+</style>
+
 <div class="row">
     <div class="col-md-6 my-4">
         <div class="bg-white">
             <div class="card-body">
-                <canvas id="myChart1" width="400" height="300"></canvas>
+                <canvas id="myChart1" width="250" height="190"></canvas>
             </div>
         </div>
     </div>
     <div class="col-md-6 my-4">
         <div class="bg-white">
             <div class="card-body">
-                <canvas id="myChart" width="400" height="300"></canvas>
+                <canvas id="myChart" width="300" height="225"></canvas>
             </div>
         </div>
     </div>
@@ -70,8 +87,13 @@
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'Parts Distribution' }
+                    legend: { position: 'top', labels: { font: { size: 14, weight: 'bold' } } },
+                    title: { display: true, text: 'Parts Distribution', font: { size: 18, weight: 'bold' } },
+                    tooltip: { enabled: true, backgroundColor: 'rgba(0,0,0,0.7)', titleFont: { weight: 'bold' } }
+                },
+                animation: {
+                    animateRotate: true,
+                    duration: 1000
                 }
             }
         });
@@ -107,8 +129,12 @@
                 responsive: true,
                 scales: { y: { beginAtZero: true } },
                 plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'Order Quantities' }
+                    legend: { position: 'top', labels: { font: { size: 14, weight: 'bold' } } },
+                    title: { display: true, text: 'Order Quantities', font: { size: 18, weight: 'bold' } },
+                    tooltip: { enabled: true, backgroundColor: 'rgba(0,0,0,0.7)', titleFont: { weight: 'bold' } }
+                },
+                animation: {
+                    duration: 1000
                 }
             }
         });

@@ -84,6 +84,7 @@ def product(request):
     products = Part.objects.all()
     restock_threshold = 10
     low_stock_products = Part.objects.filter(quantityinstock__lte=restock_threshold)
+    logger.debug(f"User: {request.user}, is_superuser: {request.user.is_superuser}, products count: {products.count()}")
     if request.method == 'POST':
         form = PartForm(request.POST)
         if form.is_valid():

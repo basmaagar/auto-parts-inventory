@@ -1,13 +1,13 @@
 {% extends 'partials/base.html' %}
-{% block title %}Customer Page{% endblock %}
+{% block title %}Profile Update{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="row my-4">
     <div class="col-md-4"></div>
     <div class="col-md-8">
         <div class="card">
-            <div class="card-header bg-info text-white">
-                Profile Page
+            <div class="card-header bg-navy text-white" style="background-color: navy !important; color: white !important;">
+                Profile Update
             </div>
             <div class="row p-3">
                 <div class="col-md-8">
@@ -15,7 +15,8 @@
                         {% csrf_token %}
                         {{ u_form|crispy }}
                         {{ p_form|crispy }}
-                        <input class="btn btn-info" type="submit" value="Update">
+                        <input class="btn btn-navy" type="submit" value="Update">
+                        <a href="{% url 'user_profile' %}" class="btn btn-secondary ml-2">Cancel</a>
                     </form>
                 </div>
             </div>
@@ -23,4 +24,4 @@
     </div>
 </div>
 
-{% endblock %} 
+{% endblock %}

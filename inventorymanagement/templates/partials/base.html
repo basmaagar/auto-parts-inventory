@@ -25,6 +25,7 @@
 </head>
 
 <body{% if user.is_superuser %} class="superuser"{% endif %}>
+    <p>DEBUG: base.html rendered for user {{ user.username }}</p>
     {% include 'partials/nav.html' %}
     {% if user.is_authenticated and not user.is_superuser %}
         {% include 'partials/sidebar.html' %}

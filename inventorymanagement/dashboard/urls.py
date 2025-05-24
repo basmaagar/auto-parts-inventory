@@ -16,7 +16,6 @@ urlpatterns = [
     path('receipt_order/<int:order_id>/', views.receipt_order, name='receipt_order'),
     path('invoice_detail/<int:invoice_id>/', views.invoice_detail, name='invoice_detail'),
     path('invoice_pdf/<int:invoice_id>/', views.invoice_pdf, name='invoice_pdf'),
-
     path('parts_data/', api_views.parts_data, name='parts_data'),
     path('orders_data/', api_views.orders_data, name='orders_data'),
 ]
