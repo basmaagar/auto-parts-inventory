@@ -43,8 +43,9 @@ body {
 .main-layout {
     display: flex;
     flex-wrap: nowrap;
-    height: calc(100vh - 56px); /* full height minus navbar */
-    overflow: hidden;
+    height: 100vh;
+    padding-top: 56px; 
+    overflow-y: auto;
     transition: margin-left 0.3s ease;
 }
 
@@ -142,9 +143,24 @@ body {
     --text-color: #333333;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 body {
     background-color: var(--background-color);
     color: var(--text-color);
+}
+
+.main-layout {
+    display: flex;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+    margin-top: -1rem; /* reduce space between nav and topnav */
 }
 
 .btn-primary {

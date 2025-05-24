@@ -24,7 +24,7 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body>
+<body{% if user.is_superuser %} class="superuser"{% endif %}>
     {% include 'partials/nav.html' %}
     <div class="main-layout">
         {% if user.is_authenticated and not user.is_superuser %} 

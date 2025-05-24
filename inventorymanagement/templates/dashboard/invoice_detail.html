@@ -5,15 +5,20 @@
 {% include 'partials/topnav.html' %}
 
 <div class="container my-4">
-    <h2>Invoice {{ invoice.invoice_number }}</h2>
-    <p><strong>Invoice Date:</strong> {{ invoice.invoice_date }}</p>
-    <p><strong>Order ID:</strong> {{ invoice.order.id }}</p>
-    <p><strong>Customer:</strong> {{ invoice.order.user.username }}</p>
-    <p><strong>Part:</strong> {{ invoice.order.part.name }}</p>
-    <p><strong>Quantity:</strong> {{ invoice.order.order_quantity }}</p>
-    <p><strong>Total Amount:</strong> ${{ invoice.total_amount }}</p>
-
-    <a href="{% url 'invoice_pdf' invoice.id %}" class="btn btn-primary">Download PDF</a>
+    <div class="card">
+        <div class="card-header bg-navy text-white" style="background-color: navy !important; color: white !important;">
+            <h2>Invoice {{ invoice.invoice_number }}</h2>
+        </div>
+        <div class="card-body">
+            <p><strong>Invoice Date:</strong> {{ invoice.invoice_date }}</p>
+            <p><strong>Order ID:</strong> {{ invoice.order.id }}</p>
+            <p><strong>Customer:</strong> {{ invoice.order.user.username }}</p>
+            <p><strong>Part:</strong> {{ invoice.order.part.name }}</p>
+            <p><strong>Quantity:</strong> {{ invoice.order.order_quantity }}</p>
+            <p><strong>Total Amount:</strong> ${{ invoice.total_amount }}</p>
+            <a href="{% url 'invoice_pdf' invoice.id %}" class="btn btn-primary">Download PDF</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}
