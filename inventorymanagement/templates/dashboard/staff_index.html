@@ -19,21 +19,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for order in orders %}
-                                <tr>
-                                    <td>{{ order.part.name }}</td>
-                                    <td>{{ order.part.category.name }}</td>
-                                    <td>{{ order.order_quantity }}</td>
-                                    <td>
-                                        {% if order.is_confirmed %}
-                                            <span class="badge badge-success">Confirmed</span>
-                                            <a href="{% url 'receipt_order' order.id %}" class="btn btn-success btn-sm ms-2">View Receipt</a>
-                                        {% else %}
-                                            <span class="badge badge-warning">Pending</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                                {% if orders %}
+                                    {% for order in orders %}
+                                    <tr>
+                                        <td>{{ order.part.name }}</td>
+                                        <td>{{ order.part.category.name }}</td>
+                                        <td>{{ order.order_quantity }}</td>
+                                        <td>
+                                            {% if order.is_confirmed %}
+                                                <span class="badge badge-success">Confirmed</span>
+                                                <a href="{% url 'receipt_order' order.id %}" class="btn btn-success btn-sm ms-2">View Receipt</a>
+                                            {% else %}
+                                                <span class="badge badge-warning">Pending</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                {% else %}
+                                    <tr>
+                                        <td colspan="4" class="text-center">No orders found.</td>
+                                    </tr>
+                                {% endif %}
                             </tbody>
                         </table>
                     </div>

@@ -20,6 +20,7 @@ def index(request):
         orders = Order.objects.all()
     else:
         orders = Order.objects.filter(user=request.user)
+    logger.debug(f"User: {request.user}, is_superuser: {request.user.is_superuser}, orders count: {orders.count()}")
 
     part_names = list(parts.values_list('name', flat=True))
     part_references = list(parts.values_list('reference', flat=True))

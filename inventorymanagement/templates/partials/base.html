@@ -24,18 +24,19 @@
     <title>{% block title %}{% endblock %}</title>
 </head>
 
-<body{% if user.is_superuser %} class="superuser"{% endif %}>
-    <p>DEBUG: base.html rendered for user {{ user.username }}</p>
+<body>
     {% include 'partials/nav.html' %}
-    {% if user.is_authenticated and not user.is_superuser %}
-        {% include 'partials/sidebar.html' %}
-    {% endif %}
+    <div class="main-layout">
+        {% if user.is_authenticated and not user.is_superuser %} 
+            {% include 'partials/sidebar.html' %}
+        {% endif %}
 
-    <div class="container-fluid content-with-sidebar">
+        <div class="container-fluid content-with-sidebar">
 
-        {% block content %}
+            {% block content %}
 
-        {% endblock %}
+            {% endblock %}
+        </div>
     </div>
 
     <link rel="stylesheet" href="{% static 'custom_dark_mode.css' %}">
