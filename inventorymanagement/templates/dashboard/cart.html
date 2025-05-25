@@ -1,0 +1,48 @@
+{% extends 'partials/base.html' %}
+
+{% block title %}Shopping Cart{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Your Shopping Cart</h2>
+    {% if cart_items %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Part</th>
+                <th>Quantity</th>
+                <th>Price per Unit</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>{{ item.part.name }}</td>
+                <td>
+                    <form method="post" action="{% url 'update_cart' item.part.id %}">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="{{ item.part.quantityinstock }}" class="form-control" style="width: 80px;">
+                        <button type="submit" class="btn btn-primary btn-sm mt-1">Update</button>
+                    </form>
+                </td>
+                <td>${{ item.part.price }}</td>
+                <td>${{ item.total }}</td>
+                <td>
+                    <form method="post" action="{% url 'remove_from_cart' item.part.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h4>Total: ${{ total_price }}</h4>
+    <a href="{% url 'checkout' %}" class="btn btn-success">Proceed to Checkout</a>
+    {% else %}
+    <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+{% endblock %}

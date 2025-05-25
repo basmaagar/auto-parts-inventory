@@ -18,4 +18,14 @@ urlpatterns = [
     path('invoice_pdf/<int:invoice_id>/', views.invoice_pdf, name='invoice_pdf'),
     path('parts_data/', api_views.parts_data, name='parts_data'),
     path('orders_data/', api_views.orders_data, name='orders_data'),
+
+    # Cart URLs
+    path('cart/', views.view_cart, name='view_cart'),
+    path('cart/add/<int:part_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/update/<int:part_id>/', views.update_cart, name='update_cart'),
+    path('cart/remove/<int:part_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('cart/checkout/', views.checkout, name='checkout'),
+
+    # About Us page
+    path('about_us/', views.about_us, name='about_us'),
 ]

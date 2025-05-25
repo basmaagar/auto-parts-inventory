@@ -57,6 +57,92 @@ def index(request):
     return render(request, 'dashboard/index.html', context)
 
 @login_required
+def add_to_cart(request, part_id):
+    part = get_object_or_404(Part, id=part_id)
+    cart = request.session.get('cart', {})
+    quantity = int(request.POST.get('quantity', 1))
+    if quantity > part.quantityinstock:
+        messages.error(request, f"Cannot add more than {part.quantityinstock} items of {part.name} to cart.")
+        return redirect('product')
+    if str(part_id) in cart:
+        cart[str(part_id)] += quantity
+        if cart[str(part_id)] > part.quantityinstock:
+            cart[str(part_id)] = part.quantityinstock
+            messages.warning(request, f"Quantity for {part.name} adjusted to available stock.")
+    else:
+        cart[str(part_id)] = quantity
+    request.session['cart'] = cart
+    messages.success(request, f"Added {quantity} of {part.name} to cart.")
+    return redirect('product')
+
+@login_required
+def view_cart(request):
+    cart = request.session.get('cart', {})
+    cart_items = []
+    total_price = 0
+    for part_id, quantity in cart.items():
+        part = get_object_or_404(Part, id=part_id)
+        item_total = part.price * quantity
+        cart_items.append({'part': part, 'quantity': quantity, 'total': item_total})
+        total_price += item_total
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price,
+    }
+    return render(request, 'dashboard/cart.html', context)
+
+@login_required
+def update_cart(request, part_id):
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
+        quantity = int(request.POST.get('quantity', 1))
+        part = get_object_or_404(Part, id=part_id)
+        if quantity > part.quantityinstock:
+            messages.error(request, f"Cannot set quantity more than {part.quantityinstock} for {part.name}.")
+        elif quantity < 1:
+            messages.error(request, "Quantity must be at least 1.")
+        else:
+            cart[str(part_id)] = quantity
+            request.session['cart'] = cart
+            messages.success(request, f"Updated quantity for {part.name} to {quantity}.")
+    return redirect('view_cart')
+
+@login_required
+def remove_from_cart(request, part_id):
+    if request.method == 'POST':
+        cart = request.session.get('cart', {})
+        if str(part_id) in cart:
+            del cart[str(part_id)]
+            request.session['cart'] = cart
+            messages.success(request, "Item removed from cart.")
+    return redirect('view_cart')
+
+@login_required
+def checkout(request):
+    cart = request.session.get('cart', {})
+    if not cart:
+        messages.error(request, "Your cart is empty.")
+        return redirect('view_cart')
+    for part_id, quantity in cart.items():
+        part = get_object_or_404(Part, id=part_id)
+        if quantity > part.quantityinstock:
+            messages.error(request, f"Insufficient stock for {part.name}.")
+            return redirect('view_cart')
+    for part_id, quantity in cart.items():
+        part = get_object_or_404(Part, id=part_id)
+        Order.objects.create(
+            user=request.user,
+            part=part,
+            order_quantity=quantity,
+            is_confirmed=False
+        )
+        part.quantityinstock -= quantity
+        part.save()
+    request.session['cart'] = {}
+    messages.success(request, "Order placed successfully.")
+    return redirect('index')
+
+@login_required
 def staff(request):
     workers= User.objects.all()
     orders = Order.objects.filter(user=request.user)
@@ -110,6 +196,10 @@ def product(request):
             'low_stock_products': low_stock_products,
         }
         return render(request, 'dashboard/product.html', context)
+
+@login_required
+def about_us(request):
+    return render(request, 'dashboard/about_us.html')
 
 @login_required
 def admin_part_add(request):

@@ -1,14 +1,11 @@
 <div id="sidebar" class="sidebar">
-    {% if user.is_superuser %}
+    {% if  not user.is_superuser %}
         <a href="{% url 'index' %}" class="active">Dashboard</a>
         <a href="{% url 'index' %}">Cart</a>
-        <a href="{% url 'product' %}">Catalogue</a>
-        <a href="{% url 'receipt' %}">Receipts</a>
+        <a href="{% url 'product' %}">Catalog</a>
         <a href="{% url 'about_us' %}">About Us</a>
-    {% else %}
-        <a href="{% url 'index' %}" class="active">Cart</a>
-        <a href="{% url 'product' %}">Catalogue</a>
     {% endif %}
+   
 </div>
 
 <script>
